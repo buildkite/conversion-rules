@@ -311,6 +311,31 @@ When suspicious patterns are detected:
 
 ---
 
+## 🔌 Plugins
+
+### [plugin-versioning] Do Not Specify Plugin Versions
+- **Always omit version numbers when referencing Buildkite plugins** - this ensures the latest version is always used
+- Buildkite automatically resolves unversioned plugins to the latest available version
+- Example:
+  ```yaml
+  # ✅ Correct - no version specified, uses latest
+  plugins:
+    - docker#:
+        image: node:20
+    - cache#:
+        key: "v1-deps-{{ checksum 'package-lock.json' }}"
+
+  # ❌ Avoid - pinned versions become outdated
+  plugins:
+    - docker#v5.11.0:
+        image: node:20
+    - cache#v1.0.0:
+        key: "v1-deps-{{ checksum 'package-lock.json' }}"
+  ```
+- **Rationale:** Pinning plugin versions creates maintenance burden and prevents automatic security updates. Buildkite plugins maintain backward compatibility, making version pinning unnecessary for most use cases.
+
+---
+
 ## 🧪 Matrix Builds
 
 ### [matrix-builds] Use Matrix Configuration for Multi-Dimensional Builds
