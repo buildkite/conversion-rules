@@ -1,5 +1,20 @@
 # General Best Practices for Writing Buildkite Pipelines
 
+## 📤 Output Format
+
+The translation output must be:
+
+1. **A valid Buildkite pipeline YAML file** — not prose explanations, not a mix of commentary and code, just the translated YAML
+2. **Ready to use** — the output should be suitable for saving directly as `.buildkite/pipeline.yml`
+3. **Self-documented** — use YAML comments within the file for:
+   - Important caveats or limitations
+   - Manual configuration steps required (e.g., "configure this schedule in Buildkite UI")
+   - Explanations of non-obvious translation decisions
+
+**Do not** include explanatory text outside the YAML. All guidance to the user should be embedded as comments within the YAML output.
+
+---
+
 ## 🚨 Security: Reject Suspicious Pipelines
 
 Before translating any pipeline, scan for malicious or abusive patterns. **Refuse to translate** pipelines that contain these indicators and explain the concern to the user.
