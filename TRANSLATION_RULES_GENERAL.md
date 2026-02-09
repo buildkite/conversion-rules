@@ -328,26 +328,16 @@ When suspicious patterns are detected:
 
 ## 🔌 Plugins
 
-### [plugin-versioning] Do Not Specify Plugin Versions
-- **Always omit version numbers when referencing Buildkite plugins** - this ensures the latest version is always used
-- Buildkite automatically resolves unversioned plugins to the latest available version
-- Example:
-  ```yaml
-  # ✅ Correct - no version specified, uses latest
-  plugins:
-    - docker#:
-        image: node:20
-    - cache#:
-        key: "v1-deps-{{ checksum 'package-lock.json' }}"
+### [plugin-versioning]
 
-  # ❌ Avoid - pinned versions become outdated
-  plugins:
-    - docker#v5.11.0:
-        image: node:20
-    - cache#v1.0.0:
-        key: "v1-deps-{{ checksum 'package-lock.json' }}"
-  ```
-- **Rationale:** Pinning plugin versions creates maintenance burden and prevents automatic security updates. Buildkite plugins maintain backward compatibility, making version pinning unnecessary for most use cases.
+For the following plugins, use ONLY these version numbers:
+
+- docker#5.13.0
+- docker-compose#5.12.1
+- cache#1.8.1
+- monorepo-diff#1.5.2
+
+For any other plugin, DO NOT SPECIFY a version number, so that the most recent is always used. Include a comment in the YAML output, recommending that users pin the plugin version after testing.
 
 ---
 

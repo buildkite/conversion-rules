@@ -24,10 +24,9 @@ This document provides rules and patterns for converting Bitbucket Pipelines to 
 These rules apply to every Bitbucket-to-Buildkite translation:
 
 1. **Reference TRANSLATION_RULES_GENERAL.md** - Always follow the general Buildkite pipeline best practices
-2. **Do not specify plugin versions** - Omit version numbers to always use latest (e.g., `docker#:` not `docker#v5.13.0:`)
-3. **Convert `script` to `command`** - Bitbucket's `script` array becomes Buildkite's `command` array
-4. **Move global `image` to steps** - Bitbucket's top-level `image` must be applied per-step via Docker plugin
-5. **Preserve YAML anchors** - Bitbucket's `definitions.steps` pattern maps well to Buildkite YAML anchors
+2. **Convert `script` to `command`** - Bitbucket's `script` array becomes Buildkite's `command` array
+3. **Move global `image` to steps** - Bitbucket's top-level `image` must be applied per-step via Docker plugin
+4. **Preserve YAML anchors** - Bitbucket's `definitions.steps` pattern maps well to Buildkite YAML anchors
 
 ## Quick Mappings
 
@@ -112,7 +111,6 @@ steps:
 
 **Key points:**
 - The `common:` key is ignored by Buildkite but allows defining reusable YAML anchors
-- No version number on `docker#:` per general translation rules
 - If steps need different images, specify different Docker plugin configurations per step
 
 ---
@@ -1084,4 +1082,3 @@ rm -rf temp/
 - [ ] Converted `size:` to appropriate agent queue
 - [ ] Converted `max-time:` to `timeout_in_minutes:`
 - [ ] Converted `deployment:` to deployment targets
-- [ ] Verified no plugin version numbers are specified
