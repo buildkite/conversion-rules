@@ -124,7 +124,15 @@ steps:
       - echo "Deploying to $ENVIRONMENT"
 ```
 
-**For path filtering** (`paths:`, `paths-ignore:`), use the monorepo-diff plugin (see Path Filtering section).
+**For path filtering** (`paths:`, `paths-ignore:`), use if_changed (see Path Filtering section).
+
+---
+
+### Step Granularity
+
+**Rule:** Each GitHub Actions step with a `name` should become a separate Buildkite step, not combined into a single step.
+
+**Exception:** Only combine steps when they share filesystem state or environment variables that don't persist between agents.
 
 ---
 
