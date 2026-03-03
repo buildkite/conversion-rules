@@ -1243,3 +1243,5 @@ steps:
 - [ ] Translate expression functions to shell commands
 - [ ] Flag GitHub-specific actions for manual handling
 - [ ] Flag unsupported triggers for manual handling
+
+4. **Remove `actions/checkout` and document** - Buildkite checks out code automatically. Add a comment explaining the removal to avoid user confusion.
