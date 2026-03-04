@@ -124,7 +124,15 @@ steps:
       - echo "Deploying to $ENVIRONMENT"
 ```
 
-**For path filtering** (`paths:`, `paths-ignore:`), use the monorepo-diff plugin (see Path Filtering section).
+**For path filtering** (`paths:`, `paths-ignore:`), use if_changed (see Path Filtering section).
+
+---
+
+### Step Granularity
+
+**Rule:** Each GitHub Actions step with a name attribute should become a separate Buildkite step with that name as the label. Do not combine multiple named steps into a single Buildkite step.
+
+**Exception:** Only combine steps when they share filesystem state or environment variables that don't persist between agents.
 
 ---
 
@@ -335,7 +343,7 @@ Configure secrets as environment variables on the agent or pass explicitly when 
 
 ### Principle 6: Checkout Options are Git Commands
 
-Buildkite's automatic checkout is equivalent to `actions/checkout` with defaults. For non-default behavior, add git commands.
+Buildkite's automatic checkout is equivalent to `actions/checkout` with defaults. For non-default behavior, add git commands. When actions/checkout (or variants like figma/actions-checkout) uses non-default options, replace with the [custom-checkout plugin](https://buildkite.com/resources/plugins/buildkite-plugins/custom-checkout-buildkite-plugin/) instead of removing it entirely.
 
 | Checkout Option | Buildkite Equivalent |
 |-----------------|---------------------|
@@ -344,6 +352,7 @@ Buildkite's automatic checkout is equivalent to `actions/checkout` with defaults
 | `persist-credentials: false` | Agent-level git credential configuration |
 | `submodules: true` | `git submodule update --init` or agent config |
 | `lfs: true` | `git lfs pull` or agent config |
+| fetch-depth: 1 | fetch: "--depth=1" |
 
 **Example:**
 
