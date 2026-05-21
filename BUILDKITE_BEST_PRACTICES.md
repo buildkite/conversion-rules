@@ -332,10 +332,10 @@ When suspicious patterns are detected:
 
 For the following plugins, use ONLY these version numbers:
 
-- docker#5.13.0
-- docker-compose#5.12.1
-- cache#1.8.1
-- monorepo-diff#1.5.2
+- docker#v5.13.0
+- docker-compose#v5.12.1
+- cache#v1.10.0
+- monorepo-diff#v1.9.1
 
 For any other plugin, DO NOT SPECIFY a version number, so that the most recent is always used. Include a comment in the YAML output, recommending that users pin the plugin version after testing.
 
